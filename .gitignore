@@ -1,0 +1,66 @@
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+__pycache__/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Build files
+dist/
+build/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Python
+*.pyc
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+
+# Uploaded dataset files
+backend/uploads/
+# Additional Python virtual environments
+.venv312/
+.venv-spark35/
+
+# Local database backups
+backend/backups/
+*.dump
+
+# Local Spark processing outputs
+spark-temp/
+
+# Private key files
+*.pem
+*.key
+
+# Development backup files
+*.before-workspace
+*.before-admin
+*.backup
+
+# Generated test output files
+backend/downloaded-employee-dataset.csv
+backend/cleaned-output.csv
+
+# Local S3 diagnostic scripts
+backend/s3-performance-test.cjs
+backend/s3-test.cjs
+backend/s3-write-test.cjs

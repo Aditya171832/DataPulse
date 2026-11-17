@@ -1,0 +1,26 @@
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: datapulse-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: datapulse_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: datapulse_db
+
+    ports:
+    - "5433:5432"
+
+    volumes:
+      - datapulse_postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U datapulse_user -d datapulse_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  datapulse_postgres_data:

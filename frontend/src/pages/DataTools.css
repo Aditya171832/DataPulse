@@ -1,0 +1,383 @@
+.tool-page {
+  color: #e5edf5;
+}
+
+.tool-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.tool-heading h2 {
+  margin: 0 0 7px;
+  color: #f1f5f9;
+  font-family: Manrope, sans-serif;
+  font-size: 25px;
+}
+
+.tool-heading p {
+  margin: 0;
+  color: #8799ab;
+  font-size: 12px;
+}
+
+.tool-heading-icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  color: #5eead4;
+  background: rgba(45, 212, 191, .11);
+  border: 1px solid #23524f;
+}
+
+.tool-controls {
+  max-width: 900px;
+}
+
+.tool-muted-icon {
+  color: #5eead4;
+  flex-shrink: 0;
+}
+
+.tool-label {
+  display: block;
+  margin: 22px 0 8px;
+  color: #8194a7;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .8px;
+}
+
+.tool-select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  color: #e5edf5;
+  background: #0b1825;
+  border: 1px solid #304356;
+  border-radius: 8px;
+  outline: none;
+  font: inherit;
+  font-size: 12px;
+}
+
+.tool-select:focus {
+  border-color: #2dd4bf;
+}
+
+.tool-select option {
+  background: #111f2d;
+}
+
+.tool-hint {
+  color: #8194a7;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.selected-dataset {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 14px;
+  padding: 12px;
+  color: #5eead4;
+  background: rgba(45, 212, 191, .06);
+  border: 1px solid #23524f;
+  border-radius: 8px;
+}
+
+.selected-dataset div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.selected-dataset strong {
+  color: #dce6ef;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.selected-dataset span {
+  color: #8194a7;
+  font-size: 9px;
+}
+
+.tool-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 15px;
+  background: #0d1a27;
+  border: 1px solid #263a4c;
+  border-radius: 9px;
+}
+
+.tool-options h4 {
+  margin: 0 0 2px;
+  color: #e5edf5;
+  font-size: 12px;
+}
+
+.tool-options > label:not(.tool-label) {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #a8b7c6;
+  font-size: 11px;
+}
+
+.tool-options input[type="checkbox"] {
+  accent-color: #2dd4bf;
+  width: 14px;
+  height: 14px;
+}
+
+.tool-options .tool-label {
+  margin-bottom: -5px;
+}
+
+.tool-range {
+  width: 100%;
+  accent-color: #2dd4bf;
+}
+
+.tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.tool-actions .primary-button,
+.secondary-button {
+  min-height: 38px;
+  cursor: pointer;
+}
+
+.tool-actions button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 13px;
+  color: #b7c6d5;
+  background: #172636;
+  border: 1px solid #304356;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.secondary-button:hover {
+  color: #5eead4;
+  border-color: #2b6962;
+}
+
+.tool-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 17px;
+  padding: 12px;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, .08);
+  border: 1px solid rgba(239, 68, 68, .2);
+  border-radius: 8px;
+  font-size: 11px;
+}
+
+.tool-error svg {
+  flex-shrink: 0;
+}
+
+.tool-results {
+  max-width: 1100px;
+  margin-top: 20px;
+}
+
+.tool-result-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 17px;
+}
+
+.tool-result-title h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #dce6ef;
+  font-size: 14px;
+}
+
+.tool-result-title h3 svg {
+  color: #5eead4;
+}
+
+.tool-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.tool-metric {
+  min-width: 0;
+  padding: 16px;
+  background: #111f2d;
+  border: 1px solid #243749;
+  border-radius: 10px;
+}
+
+.tool-metric span {
+  display: block;
+  color: #8194a7;
+  font-size: 10px;
+  text-transform: capitalize;
+}
+
+.tool-metric strong {
+  display: block;
+  margin-top: 8px;
+  color: #5eead4;
+  font-family: Manrope, sans-serif;
+  font-size: 23px;
+  overflow-wrap: anywhere;
+}
+
+.tool-result {
+  margin-top: 14px;
+  padding: 17px;
+  background: #111f2d;
+  border: 1px solid #243749;
+  border-radius: 10px;
+  min-width: 0;
+}
+
+.tool-result h3 {
+  margin: 0 0 13px;
+  color: #e5edf5;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.result-item {
+  min-width: 0;
+  padding: 11px;
+  background: #0d1a27;
+  border: 1px solid #263a4c;
+  border-radius: 7px;
+}
+
+.result-item > span {
+  display: block;
+  margin-bottom: 7px;
+  color: #5eead4;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.result-item pre,
+.tool-result > pre {
+  max-width: 100%;
+  margin: 0;
+  color: #aebdcb;
+  font-family: Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow-x: auto;
+}
+
+.created-dataset {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 15px 0;
+  padding: 13px;
+  background: rgba(45, 212, 191, .06);
+  border: 1px solid #23524f;
+  border-radius: 9px;
+  color: #5eead4;
+}
+
+.created-dataset > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.created-dataset strong {
+  color: #dce6ef;
+  font-size: 11px;
+}
+
+.created-dataset span {
+  color: #91a2b5;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.spin {
+  animation: tool-spin 1s linear infinite;
+}
+
+@keyframes tool-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 760px) {
+  .tool-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .tool-heading h2 {
+    font-size: 21px;
+  }
+
+  .tool-heading-icon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .created-dataset {
+    flex-wrap: wrap;
+  }
+
+  .created-dataset .secondary-button {
+    margin-left: 28px;
+  }
+}

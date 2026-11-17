@@ -1,0 +1,375 @@
+
+.help-page {
+  padding: 36px 42px;
+  max-width: 1500px;
+  margin: 0 auto;
+  color: #e2e8f0;
+}
+
+.help-hero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 36px;
+  background: linear-gradient(135deg, #14283a, #10202f);
+  border: 1px solid #263e50;
+  border-radius: 16px;
+  margin-bottom: 26px;
+}
+
+.help-hero-icon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(45, 212, 191, 0.12);
+  color: #2dd4bf;
+}
+
+.help-eyebrow {
+  display: block;
+  color: #2dd4bf;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.help-hero h1 {
+  margin: 0 0 10px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.help-hero p {
+  margin: 0;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.help-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #142334;
+  border: 1px solid #2a4053;
+  border-radius: 12px;
+  padding: 0 18px;
+  margin-bottom: 30px;
+  color: #94a3b8;
+}
+
+.help-search:focus-within {
+  border-color: #2dd4bf;
+}
+
+.help-search input {
+  width: 100%;
+  padding: 17px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #f8fafc;
+  font-size: 14px;
+}
+
+.help-search input::placeholder {
+  color: #71869b;
+}
+
+.help-section {
+  background: #111f2e;
+  border: 1px solid #263747;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 26px;
+}
+
+.help-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  color: #2dd4bf;
+}
+
+.help-section-heading h2 {
+  margin: 0 0 7px;
+  color: #f1f5f9;
+  font-size: 19px;
+}
+
+.help-section-heading p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.help-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.help-guide-card {
+  background: #172a3b;
+  border: 1px solid #2a4053;
+  border-radius: 12px;
+  padding: 22px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.help-guide-card:hover {
+  border-color: #2dd4bf;
+  transform: translateY(-2px);
+}
+
+.help-guide-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2dd4bf;
+  background: rgba(45, 212, 191, 0.1);
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.help-guide-card h3 {
+  margin: 0 0 9px;
+  color: #f1f5f9;
+  font-size: 15px;
+}
+
+.help-guide-card p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.help-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.help-faq {
+  border: 1px solid #2a4053;
+  background: #172a3b;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.help-faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 17px 20px;
+  border: none;
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.help-faq-question:hover {
+  color: #2dd4bf;
+}
+
+.help-faq-question svg {
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.help-chevron-open {
+  transform: rotate(180deg);
+}
+
+.help-faq-answer {
+  padding: 0 20px 18px;
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.help-faq-answer p {
+  margin: 8px 0;
+}
+
+.help-troubleshooting {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.help-troubleshooting > div {
+  padding: 20px;
+  border-radius: 12px;
+  background: #172a3b;
+  border: 1px solid #2a4053;
+}
+
+.help-troubleshooting strong {
+  display: block;
+  color: #f1f5f9;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.help-troubleshooting p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.help-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.help-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.help-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.help-form input,
+.help-form select,
+.help-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  border-radius: 10px;
+  border: 1px solid #2a4053;
+  background: #172a3b;
+  color: #f1f5f9;
+  font: inherit;
+  font-weight: 400;
+  outline: none;
+}
+
+.help-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.help-form input:focus,
+.help-form select:focus,
+.help-form textarea:focus {
+  border-color: #2dd4bf;
+}
+
+.help-form input::placeholder,
+.help-form textarea::placeholder {
+  color: #71869b;
+}
+
+.help-form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.help-form-footer span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.help-form-footer button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2dd4bf;
+  color: #0b1724;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.help-form-footer button:hover:not(:disabled) {
+  background: #5eead4;
+}
+
+.help-form-footer button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.help-empty {
+  padding: 28px;
+  text-align: center;
+  color: #94a3b8;
+  border: 1px dashed #2a4053;
+  border-radius: 10px;
+}
+
+@media (max-width: 1100px) {
+  .help-guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .help-troubleshooting {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .help-page {
+    padding: 20px 16px;
+  }
+
+  .help-hero {
+    padding: 24px;
+    align-items: flex-start;
+  }
+
+  .help-hero h1 {
+    font-size: 24px;
+  }
+
+  .help-guide-grid,
+  .help-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .help-section {
+    padding: 20px;
+  }
+
+  .help-form-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .help-form-footer button {
+    width: 100%;
+  }
+}
