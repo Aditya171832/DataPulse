@@ -25,6 +25,7 @@ model User {
   workspaceMemberships WorkspaceMember[]
   sentInvitations      Invitation[]      @relation("InvitationSender")
   supportTickets       SupportTicket[]
+  chatSessions         ChatSession[]
 }
 
 // --------------------------------------------------
@@ -38,15 +39,17 @@ model Workspace {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  owner          User              @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  owner User @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+
   members        WorkspaceMember[]
   invitations    Invitation[]
   datasets       Dataset[]
   supportTickets SupportTicket[]
+  chatSessions   ChatSession[]
 }
 
 // --------------------------------------------------
-// WORKSPACE MEMBERS
+// WORKSPACE MEMBER
 // --------------------------------------------------
 
 model WorkspaceMember {
@@ -64,7 +67,7 @@ model WorkspaceMember {
 }
 
 // --------------------------------------------------
-// INVITATIONS
+// WORKSPACE INVITATION
 // --------------------------------------------------
 
 model Invitation {
@@ -86,7 +89,7 @@ model Invitation {
 }
 
 // --------------------------------------------------
-// DATASETS
+// DATASET
 // --------------------------------------------------
 
 model Dataset {
@@ -104,6 +107,8 @@ model Dataset {
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   workspace Workspace? @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
+  chatSessions ChatSession[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -111,7 +116,7 @@ model Dataset {
 }
 
 // --------------------------------------------------
-// SUPPORT TICKETS
+// SUPPORT TICKET
 // --------------------------------------------------
 
 model SupportTicket {
@@ -134,4 +139,52 @@ model SupportTicket {
   @@index([userId])
   @@index([workspaceId])
   @@index([status])
+}
+
+// --------------------------------------------------
+// AI CHAT SESSION - NEW
+// --------------------------------------------------
+
+model ChatSession {
+  id    String @id @default(uuid())
+  title String @default("New Conversation")
+
+  userId      String
+  workspaceId String
+  datasetId   String?
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  dataset   Dataset?  @relation(fields: [datasetId], references: [id], onDelete: SetNull)
+
+  messages ChatMessage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, workspaceId, updatedAt])
+  @@index([workspaceId])
+  @@index([datasetId])
+}
+
+// --------------------------------------------------
+// AI CHAT MESSAGE - NEW
+// --------------------------------------------------
+
+model ChatMessage {
+  id        String @id @default(uuid())
+  sessionId String
+
+  role    String
+  content String
+
+  queryPlan Json?
+  result    Json?
+  chart     Json?
+
+  session ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([sessionId, createdAt])
 }

@@ -1,13 +1,21 @@
 ﻿import axios from "axios";
 
+// --------------------------------------------------
+// AXIOS CONFIGURATION
+// --------------------------------------------------
+
 const api = axios.create({
   baseURL: "http://localhost:4000/api",
 });
 
-// Add authentication token and active workspace to requests.
+// Add authentication token and active workspace.
+
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("datapulse_token");
-  const workspaceId = localStorage.getItem("datapulse_workspace_id");
+
+  const workspaceId = localStorage.getItem(
+    "datapulse_workspace_id"
+  );
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -20,7 +28,10 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Dataset interface
+// --------------------------------------------------
+// DATASET TYPES
+// --------------------------------------------------
+
 export interface Dataset {
   id: string;
   name: string;
@@ -32,18 +43,17 @@ export interface Dataset {
   updatedAt: string;
 }
 
-// Dataset response
 export interface DatasetsResponse {
   success: boolean;
   count: number;
   datasets: Dataset[];
 }
 
-// Cleaning options
 export interface CleaningOptions {
   remove_duplicates?: boolean;
   trim_whitespace?: boolean;
   standardize_columns?: boolean;
+
   missing_strategy?:
     | "none"
     | "drop_rows"
@@ -52,7 +62,12 @@ export interface CleaningOptions {
     | "fill_mode";
 }
 
+// --------------------------------------------------
+// AUTHENTICATION
+// --------------------------------------------------
+
 // Login
+
 export const loginUser = async (
   email: string,
   password: string
@@ -66,6 +81,7 @@ export const loginUser = async (
 };
 
 // Register new user
+
 export const registerUser = async (
   name: string,
   email: string,
@@ -80,15 +96,23 @@ export const registerUser = async (
   return response.data;
 };
 
+// --------------------------------------------------
+// DATASET MANAGEMENT
+// --------------------------------------------------
+
 // Get all datasets
+
 export const getDatasets = async (): Promise<DatasetsResponse> => {
   const response = await api.get("/datasets");
+
   return response.data;
 };
 
 // Upload dataset to backend and AWS S3
+
 export const uploadDataset = async (file: File) => {
   const formData = new FormData();
+
   formData.append("file", file);
 
   const response = await api.post(
@@ -104,7 +128,10 @@ export const uploadDataset = async (file: File) => {
   return response.data;
 };
 
-// Data Profiling
+// --------------------------------------------------
+// DATA PROFILING
+// --------------------------------------------------
+
 export const profileDataset = async (id: string) => {
   const response = await api.post(
     `/datasets/${id}/profile`,
@@ -114,14 +141,19 @@ export const profileDataset = async (id: string) => {
   return response.data;
 };
 
-// Data Cleaning
+// --------------------------------------------------
+// DATA CLEANING
+// --------------------------------------------------
+
 export const cleanDataset = async (
   id: string,
   options: CleaningOptions = {}
 ) => {
   const response = await api.post(
     `/datasets/${id}/clean`,
+
     {},
+
     {
       params: options,
     }
@@ -130,7 +162,10 @@ export const cleanDataset = async (
   return response.data;
 };
 
-// ETL Pipeline
+// --------------------------------------------------
+// ETL PIPELINE
+// --------------------------------------------------
+
 export const runEtlPipeline = async (id: string) => {
   const response = await api.post(
     `/datasets/${id}/etl`,
@@ -140,8 +175,13 @@ export const runEtlPipeline = async (id: string) => {
   return response.data;
 };
 
-// Apache Spark Processing
-export const runSparkProcessing = async (id: string) => {
+// --------------------------------------------------
+// APACHE SPARK PROCESSING
+// --------------------------------------------------
+
+export const runSparkProcessing = async (
+  id: string
+) => {
   const response = await api.post(
     `/datasets/${id}/spark`,
     {}
@@ -150,14 +190,20 @@ export const runSparkProcessing = async (id: string) => {
   return response.data;
 };
 
-// AI Anomaly Detection
+// --------------------------------------------------
+// AI ANOMALY DETECTION
+// --------------------------------------------------
+
 export const detectAnomalies = async (
   id: string,
+
   contamination = 0.1
 ) => {
   const response = await api.post(
     `/datasets/${id}/anomaly`,
+
     {},
+
     {
       params: {
         contamination,
@@ -168,10 +214,16 @@ export const detectAnomalies = async (
   return response.data;
 };
 
-// Download dataset
-export const downloadDataset = async (id: string) => {
+// --------------------------------------------------
+// DOWNLOAD DATASET
+// --------------------------------------------------
+
+export const downloadDataset = async (
+  id: string
+) => {
   const response = await api.get(
     `/datasets/${id}/download`,
+
     {
       responseType: "blob",
     }
@@ -180,19 +232,23 @@ export const downloadDataset = async (id: string) => {
   return response.data;
 };
 
-// Delete dataset
-export const deleteDataset = async (id: string) => {
-  const response = await api.delete(`/datasets/${id}`);
+// --------------------------------------------------
+// DELETE DATASET
+// --------------------------------------------------
+
+export const deleteDataset = async (
+  id: string
+) => {
+  const response = await api.delete(
+    `/datasets/${id}`
+  );
+
   return response.data;
 };
 
-export default api;
-
-
-
-//
-// WORKSPACE & TEAM MANAGEMENT
-//
+// --------------------------------------------------
+// WORKSPACE & TEAM MANAGEMENT TYPES
+// --------------------------------------------------
 
 export interface Workspace {
   id: string;
@@ -200,6 +256,7 @@ export interface Workspace {
   ownerId: string;
   role: string;
   createdAt: string;
+
   _count: {
     members: number;
     datasets: number;
@@ -210,6 +267,7 @@ export interface WorkspaceMember {
   id: string;
   role: string;
   joinedAt: string;
+
   user: {
     id: string;
     name: string;
@@ -225,23 +283,44 @@ export interface WorkspaceInvitation {
   createdAt?: string;
 }
 
-// List workspaces
+// --------------------------------------------------
+// GET WORKSPACES
+// --------------------------------------------------
+
 export const getWorkspaces = async (): Promise<{
   success: boolean;
   count: number;
   workspaces: Workspace[];
 }> => {
-  const response = await api.get("/workspaces");
+  const response = await api.get(
+    "/workspaces"
+  );
+
   return response.data;
 };
 
-// Create workspace
-export const createWorkspace = async (name: string) => {
-  const response = await api.post("/workspaces", { name });
+// --------------------------------------------------
+// CREATE WORKSPACE
+// --------------------------------------------------
+
+export const createWorkspace = async (
+  name: string
+) => {
+  const response = await api.post(
+    "/workspaces",
+
+    {
+      name,
+    }
+  );
+
   return response.data;
 };
 
-// Get workspace members
+// --------------------------------------------------
+// GET WORKSPACE MEMBERS
+// --------------------------------------------------
+
 export const getWorkspaceMembers = async (
   workspaceId: string
 ): Promise<{
@@ -251,6 +330,7 @@ export const getWorkspaceMembers = async (
 }> => {
   const response = await api.get(
     `/workspaces/${workspaceId}/members`,
+
     {
       headers: {
         "x-workspace-id": workspaceId,
@@ -261,9 +341,13 @@ export const getWorkspaceMembers = async (
   return response.data;
 };
 
-// Create invitation
+// --------------------------------------------------
+// CREATE WORKSPACE INVITATION
+// --------------------------------------------------
+
 export const createWorkspaceInvitation = async (
   workspaceId: string,
+
   email: string
 ): Promise<{
   success: boolean;
@@ -273,7 +357,11 @@ export const createWorkspaceInvitation = async (
 }> => {
   const response = await api.post(
     `/workspaces/${workspaceId}/invitations`,
-    { email },
+
+    {
+      email,
+    },
+
     {
       headers: {
         "x-workspace-id": workspaceId,
@@ -284,7 +372,10 @@ export const createWorkspaceInvitation = async (
   return response.data;
 };
 
-// Get pending invitations
+// --------------------------------------------------
+// GET WORKSPACE INVITATIONS
+// --------------------------------------------------
+
 export const getWorkspaceInvitations = async (
   workspaceId: string
 ): Promise<{
@@ -294,6 +385,7 @@ export const getWorkspaceInvitations = async (
 }> => {
   const response = await api.get(
     `/workspaces/${workspaceId}/invitations`,
+
     {
       headers: {
         "x-workspace-id": workspaceId,
@@ -304,25 +396,36 @@ export const getWorkspaceInvitations = async (
   return response.data;
 };
 
-// Accept invitation
+// --------------------------------------------------
+// ACCEPT WORKSPACE INVITATION
+// --------------------------------------------------
+
 export const acceptWorkspaceInvitation = async (
   token: string
 ) => {
   const response = await api.post(
     "/workspaces/invitations/accept",
-    { token }
+
+    {
+      token,
+    }
   );
 
   return response.data;
 };
 
-// Revoke invitation
+// --------------------------------------------------
+// REVOKE WORKSPACE INVITATION
+// --------------------------------------------------
+
 export const revokeWorkspaceInvitation = async (
   workspaceId: string,
+
   invitationId: string
 ) => {
   const response = await api.delete(
     `/workspaces/${workspaceId}/invitations/${invitationId}`,
+
     {
       headers: {
         "x-workspace-id": workspaceId,
@@ -333,12 +436,9 @@ export const revokeWorkspaceInvitation = async (
   return response.data;
 };
 
-
-
-
-//
+// --------------------------------------------------
 // ACCOUNT SETTINGS
-//
+// --------------------------------------------------
 
 export interface AccountUser {
   id: string;
@@ -349,13 +449,24 @@ export interface AccountUser {
   updatedAt?: string;
 }
 
+// --------------------------------------------------
+// GET ACCOUNT PROFILE
+// --------------------------------------------------
+
 export const getAccountProfile = async (): Promise<{
   success: boolean;
   user: AccountUser;
 }> => {
-  const response = await api.get("/auth/me");
+  const response = await api.get(
+    "/auth/me"
+  );
+
   return response.data;
 };
+
+// --------------------------------------------------
+// UPDATE ACCOUNT PROFILE
+// --------------------------------------------------
 
 export const updateAccountProfile = async (
   name: string
@@ -364,31 +475,44 @@ export const updateAccountProfile = async (
   message: string;
   user: AccountUser;
 }> => {
-  const response = await api.patch("/auth/profile", { name });
+  const response = await api.patch(
+    "/auth/profile",
+
+    {
+      name,
+    }
+  );
+
   return response.data;
 };
 
+// --------------------------------------------------
+// CHANGE ACCOUNT PASSWORD
+// --------------------------------------------------
+
 export const changeAccountPassword = async (
   currentPassword: string,
+
   newPassword: string
 ): Promise<{
   success: boolean;
   message: string;
 }> => {
-  const response = await api.patch("/auth/password", {
-    currentPassword,
-    newPassword,
-  });
+  const response = await api.patch(
+    "/auth/password",
+
+    {
+      currentPassword,
+      newPassword,
+    }
+  );
+
   return response.data;
 };
 
-
-
-
-
-//
-// HELP & SUPPORT
-//
+// --------------------------------------------------
+// HELP & SUPPORT TYPES
+// --------------------------------------------------
 
 export type SupportTicketCategory =
   | "General Question"
@@ -415,7 +539,10 @@ export interface CreateSupportTicketInput {
   description: string;
 }
 
-// Create a support ticket
+// --------------------------------------------------
+// CREATE SUPPORT TICKET
+// --------------------------------------------------
+
 export const createSupportTicket = async (
   input: CreateSupportTicketInput
 ): Promise<{
@@ -425,25 +552,33 @@ export const createSupportTicket = async (
 }> => {
   const response = await api.post(
     "/support/tickets",
+
     input
   );
 
   return response.data;
 };
 
-// Get tickets belonging to the logged-in user
-// in the active workspace.
+// --------------------------------------------------
+// GET MY SUPPORT TICKETS
+// --------------------------------------------------
+
 export const getMySupportTickets = async (): Promise<{
   success: boolean;
   count: number;
   tickets: SupportTicket[];
 }> => {
-  const response = await api.get("/support/tickets");
+  const response = await api.get(
+    "/support/tickets"
+  );
 
   return response.data;
 };
 
-// Get a specific support ticket
+// --------------------------------------------------
+// GET SUPPORT TICKET BY ID
+// --------------------------------------------------
+
 export const getSupportTicketById = async (
   ticketId: string
 ): Promise<{
@@ -456,3 +591,344 @@ export const getSupportTicketById = async (
 
   return response.data;
 };
+
+// ==================================================
+// AI DATA ASSISTANT
+// ==================================================
+
+// --------------------------------------------------
+// AI CHAT CHART
+// --------------------------------------------------
+
+export interface AIChatChart {
+  type: "bar";
+
+  x_key: string;
+
+  y_key: string;
+
+  data: Record<
+    string,
+    string | number | null
+  >[];
+}
+
+// --------------------------------------------------
+// CHAT SESSION DATASET
+// --------------------------------------------------
+
+export interface ChatSessionDataset {
+  id: string;
+
+  name: string;
+
+  originalName: string;
+
+  fileType?: string;
+
+  fileSize?: number;
+}
+
+// --------------------------------------------------
+// CHAT MESSAGE
+// --------------------------------------------------
+
+export interface ChatMessage {
+  id: string;
+
+  sessionId: string;
+
+  role: "USER" | "ASSISTANT";
+
+  content: string;
+
+  queryPlan: Record<string, unknown> | null;
+
+  result: unknown;
+
+  chart: AIChatChart | null;
+
+  createdAt: string;
+}
+
+// --------------------------------------------------
+// CHAT SESSION
+// --------------------------------------------------
+
+export interface ChatSession {
+  id: string;
+
+  title: string;
+
+  userId?: string;
+
+  workspaceId?: string;
+
+  datasetId: string | null;
+
+  dataset?: ChatSessionDataset | null;
+
+  createdAt: string;
+
+  updatedAt: string;
+
+  _count: {
+    messages: number;
+  };
+
+  messages?: ChatMessage[];
+}
+
+// --------------------------------------------------
+// AI CHAT RESPONSE
+// --------------------------------------------------
+
+export interface AIChatResponse {
+  success: boolean;
+
+  message: string;
+
+  sessionId: string;
+
+  session: ChatSession;
+
+  userMessageId: string;
+
+  assistantMessageId: string;
+
+  dataset: {
+    id: string;
+
+    name: string;
+
+    originalName: string;
+
+    fileType: string;
+
+    fileSize: number;
+  };
+
+  question: string;
+
+  answer: string;
+
+  query_plan: Record<string, unknown>;
+
+  result: unknown;
+
+  chart: AIChatChart | null;
+}
+
+// --------------------------------------------------
+// CHAT SESSIONS LIST RESPONSE
+// --------------------------------------------------
+
+export interface ChatSessionsResponse {
+  success: boolean;
+
+  count: number;
+
+  total: number;
+
+  page: number;
+
+  limit: number;
+
+  totalPages: number;
+
+  sessions: ChatSession[];
+}
+
+// --------------------------------------------------
+// SINGLE CHAT SESSION RESPONSE
+// --------------------------------------------------
+
+export interface ChatSessionResponse {
+  success: boolean;
+
+  message?: string;
+
+  session: ChatSession;
+
+  hasOlderMessages?: boolean;
+}
+
+// --------------------------------------------------
+// RENAME CHAT SESSION RESPONSE
+// --------------------------------------------------
+
+export interface RenameChatSessionResponse {
+  success: boolean;
+
+  message: string;
+
+  session: {
+    id: string;
+
+    title: string;
+  };
+}
+
+// --------------------------------------------------
+// DELETE CHAT SESSION RESPONSE
+// --------------------------------------------------
+
+export interface DeleteChatSessionResponse {
+  success: boolean;
+
+  message: string;
+}
+
+// --------------------------------------------------
+// CHAT WITH DATASET
+// --------------------------------------------------
+
+export const chatWithDataset = async (
+  datasetId: string,
+
+  question: string,
+
+  signal?: AbortSignal,
+
+  sessionId?: string
+
+): Promise<AIChatResponse> => {
+  const response = await api.post<AIChatResponse>(
+    "/ai/chat",
+
+    {
+      datasetId,
+
+      question,
+
+      ...(sessionId ? { sessionId } : {}),
+    },
+
+    {
+      timeout: 200000,
+
+      signal,
+    }
+  );
+
+  return response.data;
+};
+
+// --------------------------------------------------
+// CREATE NEW CHAT SESSION
+// --------------------------------------------------
+
+export const createChatSession = async (
+  datasetId: string,
+
+  title?: string
+
+): Promise<ChatSessionResponse> => {
+  const response = await api.post<ChatSessionResponse>(
+    "/ai/sessions",
+
+    {
+      datasetId,
+
+      ...(title ? { title } : {}),
+    }
+  );
+
+  return response.data;
+};
+
+// --------------------------------------------------
+// GET CHAT SESSIONS
+// --------------------------------------------------
+
+export const getChatSessions = async (
+  page = 1,
+
+  limit = 30,
+
+  signal?: AbortSignal
+
+): Promise<ChatSessionsResponse> => {
+  const response = await api.get<ChatSessionsResponse>(
+    "/ai/sessions",
+
+    {
+      params: {
+        page,
+
+        limit,
+      },
+
+      signal,
+    }
+  );
+
+  return response.data;
+};
+
+// --------------------------------------------------
+// GET CHAT SESSION BY ID
+// --------------------------------------------------
+
+export const getChatSessionById = async (
+  sessionId: string,
+
+  signal?: AbortSignal
+
+): Promise<ChatSessionResponse> => {
+  const response = await api.get<ChatSessionResponse>(
+    `/ai/sessions/${encodeURIComponent(sessionId)}`,
+
+    {
+      signal,
+    }
+  );
+
+  return response.data;
+};
+
+// --------------------------------------------------
+// RENAME CHAT SESSION
+// --------------------------------------------------
+
+export const renameChatSession = async (
+  sessionId: string,
+
+  title: string
+
+): Promise<RenameChatSessionResponse> => {
+  const response =
+    await api.patch<RenameChatSessionResponse>(
+
+      `/ai/sessions/${encodeURIComponent(sessionId)}`,
+
+      {
+        title,
+      }
+    );
+
+  return response.data;
+};
+
+// --------------------------------------------------
+// DELETE CHAT SESSION
+// --------------------------------------------------
+
+export const deleteChatSession = async (
+  sessionId: string
+
+): Promise<DeleteChatSessionResponse> => {
+  const response =
+    await api.delete<DeleteChatSessionResponse>(
+
+      `/ai/sessions/${encodeURIComponent(sessionId)}`
+    );
+
+  return response.data;
+};
+
+// --------------------------------------------------
+// EXPORT AXIOS INSTANCE
+// --------------------------------------------------
+
+export default api;

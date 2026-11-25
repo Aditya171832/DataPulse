@@ -1153,3 +1153,111 @@
     padding: 28px 22px;
   }
 }
+
+
+/* =============================================================
+   2026 REDESIGN — COBALT / LAVENDER PREMIUM LIGHT THEME
+   Self-contained overrides appended to the ORIGINAL App.css.
+   Keep all original layout and media-query rules above.
+   ============================================================= */
+:root {
+  --ui-bg: #f4f6fc;
+  --ui-surface: #ffffff;
+  --ui-ink: #1e2a44;
+  --ui-muted: #6e7d97;
+  --ui-line: #e3e8f3;
+  --ui-accent: #6758ed;
+  --ui-accent-soft: #eeebff;
+  --ui-shadow: 0 10px 28px rgba(28, 41, 81, .065);
+  color-scheme: light;
+}
+body { background: var(--ui-bg); color: var(--ui-ink); }
+.app-shell { background: var(--ui-bg); }
+.sidebar {
+  background: linear-gradient(165deg, #111b37 0%, #1b2450 100%);
+  border-color: #30395d;
+  box-shadow: 5px 0 25px rgba(13, 25, 55, .08);
+}
+.brand-icon { background: linear-gradient(135deg, #a58aff, #5d76f8); color: white; box-shadow: 0 6px 18px #6d62ee44; }
+.brand h1, .workspace-info strong, .user-info strong, .storage-value strong { color: #f8faff; }
+.brand span, .nav-heading, .workspace-info span, .user-info span, .storage-title, .storage-value span, .storage-card p { color: #a5b2d2; }
+.workspace, .storage-card { background: #ffffff0d; border-color: #ffffff1c; border-radius: 13px; }
+.workspace-avatar, .user-avatar { background: #8172ff33; color: #d9d2ff; }
+.nav-item { color: #b5c2e0; border-radius: 11px; }
+.nav-item:hover { background: #ffffff12; color: #fff; }
+.nav-item.active { background: linear-gradient(95deg, #7565ff55, #7565ff16); color: #fff; box-shadow: inset 3px 0 #ae9dff; }
+.nav-new { background: #8070ff33; color: #ded8ff; }
+.storage-track { background: #ffffff25; }
+.storage-progress { background: linear-gradient(90deg, #a18cff, #65d5fa); }
+.user-profile { border-color: #ffffff24; }
+.main-content { background: var(--ui-bg); }
+.topbar { background: #ffffffed; border-color: var(--ui-line); box-shadow: 0 2px 12px #1d2d4d08; }
+.breadcrumb, .breadcrumb-separator { color: #8290a9; }
+.breadcrumb strong { color: #26344f; }
+.search-box { background: #f5f7fd; border-color: var(--ui-line); color: #73809b; border-radius: 11px; }
+.search-box input { color: var(--ui-ink); }
+.search-box input::placeholder, .search-box kbd { color: #8997b0; }
+.search-box kbd { border-color: #dbe1ee; }
+.icon-button { color: #687895; }
+.notification-dot, .live-dot { background: #7665f6; box-shadow: 0 0 10px #7665f666; }
+.eyebrow { color: #695be8; }
+.welcome-row h2 { color: #1e2a44; }
+.welcome-row p { color: var(--ui-muted); }
+.primary-button, .login-submit {
+  background: linear-gradient(110deg, #6d5af4, #4988f6);
+  color: #fff; border-radius: 11px; box-shadow: 0 5px 15px #6758ed30;
+}
+.primary-button:hover, .login-submit:hover { background: linear-gradient(110deg, #5b49e8, #3576ea); box-shadow: 0 8px 20px #6758ed40; }
+.stat-card, .panel {
+  background: var(--ui-surface); border: 1px solid var(--ui-line);
+  border-radius: 17px; box-shadow: var(--ui-shadow);
+}
+.stat-card { background: linear-gradient(155deg, #fff 65%, #f9f8ff); }
+.stat-card:hover, .panel:hover { border-color: #d9def0; }
+.stat-icon { border-radius: 12px; }
+.stat-icon.teal { color: #16a68f; background: #e2f8f3; }
+.stat-icon.blue { color: #367fe8; background: #e8f1ff; }
+.stat-icon.purple { color: #7459d9; background: #f0eaff; }
+.stat-icon.orange { color: #e58a31; background: #fff1e2; }
+.stat-label, .stat-foot, .stat-neutral, .chart-summary span, .panel-header p, .chart-note, .donut-center span, .department-legend-item small { color: var(--ui-muted); }
+.stat-number, .panel-header h3, .chart-summary strong, .donut-center strong, .department-legend-item strong { color: #202d47; }
+.stat-warning { color: #c8792e; }
+.chart-tag { background: #eeebff; color: #6959e7; border-color: #dcd5ff; }
+.more-button { color: #64748e; border-color: var(--ui-line); background: #f8f9fd; }
+.department-legend-item { color: #65748f; }
+.text-button { color: #6355e5; }
+.table-row { color: #65748d; border-color: #e9edf6; }
+.table-heading { color: #8490a5; }
+.dataset-name strong { color: #273650; }
+.dataset-name small, .file-type { color: #74829a; }
+.file-icon { color: #6657e6; background: #eeebff; }
+.status-pill.success { color: #078766; background: #e3f9ef; }
+.status-pill.warning { color: #af6b1d; background: #fff2e2; }
+.status-pill.error { color: #b64055; background: #fff0f2; }
+/* Login / registration */
+.login-page { background: radial-gradient(circle at 12% 14%, #e0e4ff 0%, transparent 38%), radial-gradient(circle at 89% 83%, #dcefff 0%, transparent 38%), #f5f7fd; }
+.login-card { background: #ffffff; border: 1px solid #e3e8f3; border-radius: 24px; box-shadow: 0 24px 75px #253a6a1c; }
+.login-brand-icon { background: linear-gradient(135deg, #8f7bff, #4787fa); color: white; }
+.login-card h1, .login-card h2 { color: #1e2a44; }
+.login-subtitle, .login-description, .login-footer, .login-switch { color: #73819a; }
+.login-card label { color: #43536f; }
+.login-input { background: #fdfdff; border-color: #dce3f0; color: #73819a; }
+.login-input:focus-within { border-color: #8676f8; box-shadow: 0 0 0 3px #8676f822; }
+.login-input input { color: #26344e; }
+.login-input input::placeholder { color: #9aa6ba; }
+.login-error { color: #b4324b; background: #fff1f3; border-color: #fbd0d7; }
+.login-success { color: #087b5b; background: #eafbf2; border-color: #b9efd8; }
+.password-toggle, .logout-button { color: #8a97ad; }
+.password-toggle:hover, .logout-button:hover, .login-switch button, .text-button:hover { color: #6959e7; }
+.login-switch button:hover { color: #4d3fcb; }
+.backend-error { color: #a65c21; background: #fff4e9; border-color: #f4d5b4; }
+.backend-error button { color: #a65c21; border-color: #e8c39d; }
+.dataset-empty { color: #7b899f; border-color: #e8edf5; }
+/* Inputs and accessibility */
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+:focus-visible { outline: 3px solid #9e94ff; outline-offset: 2px; }
+::selection { background: #dedaff; color: #28225d; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

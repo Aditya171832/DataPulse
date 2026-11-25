@@ -42,6 +42,7 @@ import AnalyticsPage from "./pages/Analytics";
 import TeamPage from "./pages/Team";
 import SettingsPage from "./pages/Settings";
 import HelpSupportPage from "./pages/HelpSupport";
+import AIAssistant from "./pages/AIAssistant";
 import "./App.css";
 import AdminDashboard from "./admin/AdminDashboard";
 
@@ -73,6 +74,7 @@ const navigation = [
   { label: "Data Cleaning", icon: Sparkles },
   { label: "ETL Pipeline", icon: Zap },
   { label: "AI Insights", icon: Activity },
+  { label: "AI Assistant", icon: Sparkles },
 ];
 
 const tools = [
@@ -239,7 +241,7 @@ function App() {
           </div>
 
           <div>
-            <h1>DataPulse</h1>
+            <h1>DataNexus</h1>
             <span>DATA INTELLIGENCE</span>
           </div>
         </div>
@@ -273,7 +275,7 @@ function App() {
 
                 <span>{item.label}</span>
 
-                {item.label === "AI Insights" && (
+                {(item.label === "AI Insights" || item.label === "AI Assistant") && (
                   <span className="nav-new">AI</span>
                 )}
               </button>
@@ -405,6 +407,17 @@ function App() {
 
         ) : activePage === "Help" ? (
           <HelpSupportPage />
+
+        /* AI DATA ASSISTANT PAGE */
+
+        ) : activePage === "AI Assistant" ? (
+          <AIAssistant
+            key={localStorage.getItem("datapulse_workspace_id") || "default-workspace"}
+            datasets={datasets}
+            loading={datasetsLoading}
+            error={datasetsError}
+            onRetry={() => void loadDatasets()}
+          />
 
         /* FOUR DATA PROCESSING PAGES */
 

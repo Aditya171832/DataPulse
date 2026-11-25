@@ -64,3 +64,44 @@ backend/cleaned-output.csv
 backend/s3-performance-test.cjs
 backend/s3-test.cjs
 backend/s3-write-test.cjs
+
+
+# Additional virtual environments
+.venv*/
+venv*/
+
+# AWS credentials
+.aws/
+credentials
+
+# Spark generated files
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Database backups
+backups/
+*.sqlite
+*.sqlite3
+*.db
+
+# Additional temporary backup files
+*.bak
+*.before-*
+
+# Private dataset files
+uploads/
+*.csv
+*.xlsx
+*.xls
+
+# Compressed project backups
+*.zip
+*.rar
+*.7z
+
+# TypeScript build cache
+*.tsbuildinfo
+
+# Local development scripts containing personal information
+backend/scripts/add-vaishnavi.cjs
